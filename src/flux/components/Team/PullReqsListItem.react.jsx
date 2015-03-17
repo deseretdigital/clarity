@@ -62,7 +62,7 @@ var PullReqsListItem = React.createClass({
         });
 
         var htmlStories = _.map(storyIds, function(storyId){
-            return <StoryItem id={storyId} data={self.props.stories[storyId]} />;
+            return <StoryItem id={storyId} data={self.props.stories[storyId]}  context={StoryItem.contexts.PULL_REQUEST}/>;
         });
 
         return (

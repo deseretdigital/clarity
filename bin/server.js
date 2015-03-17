@@ -41,6 +41,8 @@ app.use('/api', ApiRouter);
 app.use('/examples', express.static(__dirname + '/../examples'));
 app.use('/img', express.static(__dirname + '/../img'));
 
+app.set('json spaces', 2);
+
 /**
  * React async route
  */

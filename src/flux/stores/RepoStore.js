@@ -33,6 +33,8 @@ RepoStore.prototype = merge(EventEmitter.prototype, {
                 self._get_promises[repoName] = null;
                 self.repos[repoName] = resp.body.data;
                 self.emitChange();
+
+                return self.repos[repoName];
             });
 
         return self._get_promises[repoName];

@@ -2,7 +2,16 @@ var _ = require('lodash');
 var React = require('react');
 var moment = require('moment');
 
+var StoryQaBar = require('./StoryQaBar.react');
+
 var StoryItem = React.createClass({
+  statics: {
+    contexts: {
+      PULL_REQUEST: 'PULL_REQUEST',
+      MASTER: 'MASTER',
+      RELEASE: 'RELEASE'
+    }
+  },
   _slugify: function(text){
     text = text.replace(/\ /g, '-');
     text = text.replace(/\:/g, '');
@@ -13,6 +22,11 @@ var StoryItem = React.createClass({
     return _.map(labelsArr, function(label){
       return label.name;
     });
+  },
+  getDefaultProps: function(){
+    return {
+      context: 'PULL_REQUEST'
+    }
   },
   render: function(){
     var self = this;
@@ -47,7 +61,7 @@ var StoryItem = React.createClass({
           <h4 className="title">[<a href={"https://www.pivotaltracker.com/story/show/" + this.props.id} target="_blank">#{this.props.id}</a>] {title}</h4>
           <div className="labels"><strong>Labels:</strong> {strLabels}</div>
         </div>
-        <div className="qaStatus qaAttention"><strong>QA:</strong> missing qa-done-master - QA required for this story! <button className="pure-button button-success addLabel" data-label="qa-done-master" data-story="85086626">Accept QA</button></div>
+        <StoryQaBar id={this.props.id} context={this.props.context} labels={labels} storyState={state} />
       </div>
     );
   }

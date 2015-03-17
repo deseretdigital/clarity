@@ -49,6 +49,11 @@ DiffStore.prototype = merge(EventEmitter.prototype, {
                 self.simpleDiffs[repoName][diffName] = resp.body.data;
                 self.emitChange();
                 return self.simpleDiffs[repoName][diffName];
+            })
+            .catch(function(err){
+                console.error(err);
+                self._getSimple_promises[repoName][diffName] = null;
+                self.emitChange();
             });
 
         return self._getSimple_promises[repoName];

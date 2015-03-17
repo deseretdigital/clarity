@@ -21,6 +21,7 @@ var Menu = require('../components/Team/Menu.react');
 var PullReqsHeader = require('../components/Team/PullReqsHeader.react');
 var PullReqsList = require('../components/Team/PullReqsList.react');
 var LatestRelease = require('../components/Project/LatestRelease.react');
+var MasterList = require('../components/Team/Master/MasterList.react');
 
 var TeamProjectController = React.createClass({
     mixins: [Router.State, ReactAsync.Mixin],
@@ -94,6 +95,9 @@ var TeamProjectController = React.createClass({
                     <PullReqsHeader pullReqsCount={_.keys(this.state.pullReqs).length}/>
                     <PullReqsList pullReqs={this.state.pullReqs} branches={this.state.branches} project={this.state.project} stories={this.state.stories} />
                 </div>
+                <div className="pure-u-1-2">
+                    <MasterList masters={this.state.masters} project={this.state.project} stories={this.state.stories} />
+                </div>
             </div>
         
         );
@@ -154,6 +158,9 @@ var TeamProjectController = React.createClass({
                 state.branches = branches;
                 self.loadedProjects[self._getProjectName()] = true;
                 //console.log("TeamProjectController#_buildState finished", state);
+                return self._buildState_getMaster(state);
+            }).then(function(masters){
+                state.masters = masters;
                 return state;
             });
     },
@@ -267,6 +274,43 @@ var TeamProjectController = React.createClass({
             return collectedBranches;
         });
     },
+    _buildState_getMaster: function(state){
+        var masters = {};
+        var promises = [];
+
+        _.forEach(state.project.repoNames, function(repoName){
+            // Get the latest release for this repo
+            var release = _.filter(state.latestReleases, function(release){ 
+                if(release.repo == repoName)
+                {
+                    return release;
+                }
+            }).pop(); // Grab the first array item since we will only return one.
+
+            console.log("TeamProjectController#_buildState_getMaster state", state)
+
+            var masterName = state.repos[repoName].default_branch;
+
+            var masterPromise = BranchStore
+                .get(repoName, masterName)
+                .then(function(masterBranch){
+                    console.log("TeamProjectController#_buildState_getMaster masterBranch", masterBranch);
+                    masters[repoName] = masterBranch;
+
+                    return DiffStore.getSimple(repoName, release.tag_name, masterName).then(function(diff){
+                        // Assign storyIds to state list so they can get looked up
+                        state.storyIds = _.assign(state.storyIds, diff.storyIds);
+                        masters[repoName].diff = diff;
+                    });
+                });
+
+            promises.push(masterPromise);
+        });
+
+        return Promise.all(promises).then(function(){
+            return masters;
+        });
+    },
 
     /**
      * We do this one a little differently since diffs can take longer. So we
@@ -305,6 +349,8 @@ var TeamProjectController = React.createClass({
 
         return Promise.resolve(stories);
     },
+    _onChange_running: false,
+    _onChange_deferredCount: 0,
     _onChange: function() {
         var self = this;
         if(this.initState)
@@ -313,10 +359,26 @@ var TeamProjectController = React.createClass({
             return;
         }
 
+        /* if(self._onChange_running)
+        {
+            self._onChange_deferredCount++;
+            console.log("TeamProjectController#_onChange is already running, _onChange_deferredCount", self._onChange_deferredCount)
+            return;
+        }
+
+        self._onChange_running = true;
+        self._onChange_deferredCount = 0; */
+
         this._buildRequiredState().then(function(state){
             return self._buildAdditionalState(state);
         }).then(function(state){
             self.setState(state);
+            self._onChange_running = false;
+
+            /* if(self._onChange_deferredCount > 0)
+            {
+                self._onChange();
+            }*/
         });
     },
     _getTeamName: function(){

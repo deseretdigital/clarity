@@ -177,6 +177,10 @@ var RepoApi = function(router){
                 self.cache.set(cacheKey, data, 60 * 30); // Cache for 30 minutes
                 ret.data = data;
                 res.send(ret);        
+            })
+            .catch(function(err){
+                ret.err = err;
+                res.send(ret);
             });
     });
 };
@@ -191,7 +195,7 @@ _.assign(RepoApi.prototype, {
             var cached = self.cache.get(cacheKey);
             if(cached[cacheKey])
             {
-                return resolve(cached);
+                return resolve(cached[cacheKey]);
             }    
 
             GitHubClient.repos.get({
@@ -289,6 +293,10 @@ _.assign(RepoApi.prototype, {
                 if(err){
                     return reject(err);
                 }
+
+                // Save the repo/owner details
+                res.repo = repoName;
+                res.owner = orgName;
 
                 resolve(res);
             });

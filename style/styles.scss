@@ -270,8 +270,17 @@
     font-weight: bold;
     background-color:#999999;
     color:#ffffff;
-    padding:2px 2px;
+    padding:3px 3px;
     text-align: left;
+    overflow: auto;
+    vertical-align: center;
+    min-height:30px;
+}
+
+.qaStatus .qaMessage {
+    display: inline-block;
+    padding-top:7px;
+    padding-left:5px;
 }
 
 .qaStatus button {
