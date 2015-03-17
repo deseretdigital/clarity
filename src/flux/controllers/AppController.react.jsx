@@ -9,8 +9,13 @@ var TeamStore = require('../stores/TeamStore');
 
 var Header = require('../components/Layout/Header.react');
 
-function _randomNumber (low, high) {
-    return Math.floor(Math.random() * (high - low + 1) + low);
+function getImage() {
+    if(moment().format('MM-DD') == '04-01')
+    {
+        return 'april-fools';
+    }
+
+    return moment().format('E');
 };
 
 var AppController = React.createClass({
@@ -19,7 +24,7 @@ var AppController = React.createClass({
 
     getDefaultProps: function(){
         return {
-            randomImage: moment().format('E') // day of week 1 - 7
+            randomImage:  getImage()
         };
     },
     

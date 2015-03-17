@@ -108,8 +108,12 @@ var TeamProjectController = React.createClass({
         loadProgress = loadProgress + progress;
         this.setState({loadProgress: loadProgress});
     },
+    _buildCount: 0,
     _buildRequiredState: function(){
         var self = this;
+
+        self._buildCount++;
+        //console.log("TeamProjectController#_buildRequiredState self._buildCount", self._buildCount);
 
         var state = {
             project: null,
