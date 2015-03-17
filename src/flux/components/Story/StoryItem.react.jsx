@@ -31,7 +31,7 @@ var StoryItem = React.createClass({
   render: function(){
     var self = this;
 
-    //console.log("StoryItem#render this.props", this.props);
+    console.log("StoryItem#render this.props", this.props);
 
     var classes = ['story'];
     var title = 'Loading';
@@ -43,7 +43,7 @@ var StoryItem = React.createClass({
     {
       title = this.props.data.name;
       state = this.props.data.current_state;
-      var labels = self._getLabels(this.props.labels);
+      var labels = self._getLabels(this.props.data.labels);
       var strLabels = labels.join(', ');
 
       _.forEach(labels, function(label){

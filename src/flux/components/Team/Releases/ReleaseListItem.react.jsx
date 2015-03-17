@@ -18,6 +18,7 @@ var ReleaseListItem = React.createClass({
         var releaseName = '';
 
         var htmlReleaseDetails = _.map(releases, function(release){
+            //console.log("ReleaseListItem#render release", release);
             releaseName = release.tag_name;
             if(release.diff)
             {
@@ -27,8 +28,9 @@ var ReleaseListItem = React.createClass({
             return (
                 <div>
                     <strong>{release.repo}</strong> - 
-                    Release Published: {moment(release.published_at).format("dddd, MMMM Do YYYY, h:mm:ss a")}
-                    Last Commit Date: {moment(release.updated_at).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+                    Release Published: {moment(release.published_at).format("L")}
+                    <span> </span>
+                    Last Commit Date: {moment(release.created_at).format("L")}
                 </div>
             );
         });
@@ -41,7 +43,7 @@ var ReleaseListItem = React.createClass({
             <div className="release">
                 <div className="releaseInside">
                     <h3>Release: {releaseName}</h3>
-                    <strong>Released:</strong> {} <strong>Last Commit Date:</strong>
+                    {htmlReleaseDetails}
                     {htmlStories}
                 </div>
             </div>
