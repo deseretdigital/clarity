@@ -41,7 +41,7 @@ DiffStore.prototype = merge(EventEmitter.prototype, {
             self._getSimple_promises[repoName] = {};
         }
 
-        self._getSimple_promises[repoName] = request.get('/api/repo/' + repoName + '/diff/' + baseName + '/' + headName + '?simple=1')
+        self._getSimple_promises[repoName][diffName] = request.get('/api/repo/' + repoName + '/diff/' + baseName + '/' + headName + '?simple=1')
             .set({'Accept': 'application/json'})
             .promise()
             .then(function(resp){
@@ -56,7 +56,7 @@ DiffStore.prototype = merge(EventEmitter.prototype, {
                 self.emitChange();
             });
 
-        return self._getSimple_promises[repoName];
+        return self._getSimple_promises[repoName][diffName];
     },
 
     getDiffName: function(baseName, headName){

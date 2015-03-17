@@ -31,7 +31,7 @@ var StoryItem = React.createClass({
   render: function(){
     var self = this;
 
-    console.log("StoryItem#render this.props", this.props);
+    //console.log("StoryItem#render this.props", this.props);
 
     var classes = ['story'];
     var title = 'Loading';
