@@ -1,0 +1,287 @@
+.content * {
+    box-sizing:border-box;
+}
+
+/* Buttons */
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.button-xsmall {
+    font-size: 70%;
+}
+
+.button-small {
+    font-size: 85%;
+}
+
+.button-large {
+    font-size: 110%;
+}
+
+.button-xlarge {
+    font-size: 125%;
+}
+
+/* Pull Requests */
+.pullRequest {
+    background-color: #4dbaf6;
+    background-image: url('/img/bg-branch.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+}
+
+.pullRequest .prInside {
+    background:#dbf1fd;
+    overflow: auto; 
+    z-index: 100;
+    padding: 5px 10px 5px 10px;
+}
+
+.pullRequest h3, .pullRequest h4, .pullRequest h5, .pullRequest h5 {
+    margin:5px 0 5px 0;
+}
+
+.prBranch {
+    background-color: #354459;
+    background-image: url('/img/bg-pull-request.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+}
+
+.prBranch .prbInside {
+    background:#d7dade;
+    overflow: auto; 
+    z-index: 100;
+    padding: 5px 10px 5px 10px;
+}
+
+.prBranch .summary div { float: left; padding:0 8px 0 0; font-size:14px;}
+
+.prBranch .details {
+    clear:both;
+    display:none;
+    margin:10px;
+    padding:10px;
+    background:#ffffff;
+}
+
+/* Master */
+.master {
+    background-color: #354459;
+    background-image: url('/img/bg-master.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+}
+
+.master .masterInside {
+    background:#d7dade;
+    overflow: auto; 
+    z-index: 100;
+    padding: 5px 10px 5px 10px;
+}
+
+.master h3, .master h4, .master h5, .master h5 {
+    margin:5px 0 5px 0;
+}
+
+/* Releasees */
+/* Master */
+.release {
+    background-color: #565656;
+    background-image: url('/img/bg-release.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+}
+
+.release .releaseInside {
+    background:#cecece;
+    overflow: auto; 
+    z-index: 100;
+    padding: 5px 10px 5px 10px;
+}
+
+.release h3, .release h4, .release h5, .release h5 {
+    margin:5px 0 5px 0;
+}
+
+
+/* Commit List */
+.commitList {
+    background-color: #66b4cd;
+    background-image: url('/img/bg-commits.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+}
+
+.commitList .commitListInside {
+    background:#dceff5;
+    overflow: auto; 
+    z-index: 100;
+    padding: 5px 10px 5px 10px;
+    min-height: 80px;
+}
+
+/* Stories */
+
+.story {
+    background-color: #adc4cd;
+    background-image: url('/img/bg-story.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+}
+
+.storyInside {
+    background:#eef3f5;
+    overflow: auto; 
+    z-index: 100;
+    padding: 5px 10px 5px 10px;
+}
+
+.story .state {
+    float:right;
+    font-size:12px;
+    font-weight: bold;
+    width:70px;
+    text-align: center;
+}
+
+.story .labels {
+    font-size: 11px;
+}
+
+.story.state-started {
+    background-color: #66cdb8;
+}
+
+.story.state-started .storyInside {
+    background-color: #dcf5f0;
+}
+
+.story.state-finished {
+    background-color: #cccd66;
+}
+
+.story.state-finished .storyInside {
+    background-color: #f4f5dc;
+}
+
+.story.state-delivered {
+    background-color: #b666cd;
+}
+
+.story.state-delivered .storyInside {
+    background-color: #efdcf5;
+}
+
+.story.state-accepted {
+    background-color: #75cd66;
+}
+
+.story.state-accepted .storyInside {
+    background-color: #e0f5dc;
+}
+
+.story.state-rejected {
+    background-color: #cd6666;
+}
+
+.story.state-rejected .storyInside {
+    background-color: #f5dcdc;
+}
+
+/* Story Special Statuses */
+.story.label-special .storyInside {
+    background-image: url('/img/bg-special.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100px;
+}
+
+/* Build Statuses */
+.buildStatus {
+    font-size: 12px;
+    font-weight: bold;
+    background-color:#999999;
+    color:#ffffff;
+    padding:2px 2px;
+    text-align: center;
+}
+
+.buildStatus a {
+    color:#ffffff;
+}
+
+.buildStatus.build-success {
+    background-color:#10da10;
+}
+
+.buildStatus.build-pending {
+    background-color: #f28e00;
+}
+
+.buildStatus.build-error, .buildStatus.build-failure {
+    background-color: #da1010;
+}
+
+/* QA Statuses */
+
+.qaStatus {
+    font-size: 12px;
+    font-weight: bold;
+    background-color:#999999;
+    color:#ffffff;
+    padding:2px 2px;
+    text-align: left;
+}
+
+.qaStatus button {
+    float:right;
+}
+
+.qaDone {
+    background-color:#10da10;
+}
+
+.qaAttention {
+    background-color: #f28e00;
+}

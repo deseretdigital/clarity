@@ -1,0 +1,63 @@
+{
+  "name": "dnews-national2",
+  "description": "Deseret News National v2",
+  "repository": "https://github.com/deseretdigital/dnews-national2",
+  "authors": [
+    {
+      "name": "Justin Carmony "
+    },
+    {
+      "name": "Matt Montgomery"
+    }
+  ],
+  "dependencies": {
+    "bluebird": "^2.4.2",
+    "body-parser": "^1.11.0",
+    "dotenv": "^0.5.1",
+    "express": "^4.10.6",
+    "fibers": "^1.0.2",
+    "flux": "^2.0.1",
+    "github": "^0.2.3",
+    "invariant": "^1.0.2",
+    "jquery": "^1.11.1",
+    "keymirror": "^0.1.1",
+    "lodash": "^2.4.1",
+    "minimist": "^1.1.0",
+    "moment": "^2.7.0",
+    "morgan": "^1.5.0",
+    "node-cache": "^1.1.0",
+    "node-jsx": "^0.12.4",
+    "object-assign": "^2.0.0",
+    "purecss": "^0.6.0",
+    "react": "^0.12.2",
+    "react-async": "^2.0.1",
+    "react-infinite-scroll": "git+ssh://git@github.com:syehor/react-infinite-scroll.git",
+    "react-raf-batching": "git+ssh://git@github.com:mattmontgomery/react-raf-batching.git",
+    "react-router": "^0.11.6",
+    "react-router-component": "^0.23.2",
+    "redis": "^0.12.1",
+    "superagent": "^0.21.0",
+    "superagent-bluebird-promise": "^1.1.1",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^1.0.0",
+    "chai": "^1.10.0",
+    "css-loader": "^0.9.0",
+    "extract-text-webpack-plugin": "^0.3.5",
+    "gulp": "^3.8.10",
+    "gulp-jshint": "^1.9.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-sass": "^1.2.4",
+    "gulp-util": "^3.0.1",
+    "gulp-watch": "^3.0.0",
+    "gulp-webpack": "^1.1.2",
+    "jshint-stylish": "^1.0.0",
+    "jsx-loader": "^0.12.2",
+    "require-dir": "^0.1.0",
+    "sass-loader": "^0.3.1",
+    "style-loader": "^0.8.2",
+    "supervisor": "^0.6.0",
+    "webpack": "^1.4.13"
+  }
+}

@@ -1,0 +1,203 @@
+#app * {
+    box-sizing: border-box;
+}
+
+#home {
+    
+  text:#fff;
+
+  h2 {
+    margin: 0;
+    padding-top: 20%;
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    color:#fff;
+    background: transparent;
+  }
+}
+
+#main {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    left: 200px;
+    bottom: 0px;
+    padding:20px;
+    background: #fff;
+    overflow: scroll;
+    /* margin-left:200px;
+    min-height: 100%; */
+}
+
+#app {
+     height:100%;
+      width:100%;
+      background: url(/img/clarity-bg.jpg) no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+
+#clarityApp #app .transparentHome {
+    background:transparent;
+    
+
+   
+}
+
+#app a {
+   outline: 0;
+}
+
+#app header {
+    height:60px;
+    background: transparent;
+    box-sizing: border-box;
+
+    .homeLink {
+        float:left;
+        display: block;
+        width:200px;
+        height:60px;
+        color: #ffffff;
+        weight:bold;
+        text-decoration: none;
+        padding-top:17px;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+
+    }
+
+    .teamList {
+        float: left;
+        width: 100px;
+        height:60px;
+        padding-top:20px;
+        padding-right:10px;
+        text-align: right;
+        font-size: 18px;
+        color:#fff;
+    }
+
+    ul {
+        list-style: none;
+        margin:0;
+        padding:0;
+
+        li {
+            float:left;
+            height:60px;
+            
+            a {
+                display: block;
+                height: 60px;
+                padding:22px 20px 0 20px;
+                text-decoration: none;
+                color:#fff;
+                
+                &:hover {
+                    background: #333;
+                }
+
+                &.active, &.active:hover {
+                    color:#fff;
+                    background: #1f8dd6;
+                }
+            }
+
+
+        }
+    }
+}
+
+.aheadBehindBar {
+  background: #ddd;
+  width:100%;
+  height:10px;
+  .behind {
+    background: #354458;
+    float:left;
+    width:50%;
+    height:10px;
+
+    .current {
+      background: #f45353;
+      height:10px;
+      float:right;
+    }
+  }
+
+  .ahead {
+    background: #354458;
+    float:right;
+    height:10px;
+    width:50%;
+
+    .current {
+      background: #6ef453;
+      float: left;
+      height:10px;
+    }
+  }
+}
+
+/* Spinner Loader */
+.meter { 
+    height: 20px;  /* Can be anything */
+    position: relative;
+    background: #555;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    
+    box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+
+.meter > span {
+  display: block;
+  height: 20px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(43,194,83);
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43,194,83) 37%,
+    rgb(84,240,84) 69%
+  );
+  box-shadow: 
+    inset 0 2px 9px  rgba(255,255,255,0.3),
+    inset 0 -2px 6px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.meter > span:after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-image: linear-gradient(
+    -45deg, 
+    rgba(255, 255, 255, .2) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(255, 255, 255, .2) 50%, 
+    rgba(255, 255, 255, .2) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  z-index: 1;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+}
