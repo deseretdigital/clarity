@@ -3,17 +3,23 @@ var ReactAsync = require('react-async');
 var Router = require('react-router');
 var Promise = require('bluebird');
 var RouteHandler = Router.RouteHandler;
+var moment = require('moment');
 
 var TeamStore = require('../stores/TeamStore');
 
 var Header = require('../components/Layout/Header.react');
 
+function _randomNumber (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+};
+
 var AppController = React.createClass({
     mixins: [ Router.State, ReactAsync.Mixin ],
     
+
     getDefaultProps: function(){
         return {
-            
+            randomImage: moment().format('E') // day of week 1 - 7
         };
     },
     
@@ -48,16 +54,9 @@ var AppController = React.createClass({
         TeamStore.removeChangeListener(this._onChange);
     },
     render: function(){
-        var isHome = this.isActive('home');
-        var className = "";
-        if(isHome)
-        {
-            className = "coolBg";
-        }
-
         return (
-            <div id="app" className={className}>
-                <Header teams={this.state.teams} isHome={isHome} />
+            <div id="app" style={{backgroundImage: "url(/img/clarity-bg-" + this.props.randomImage + ".jpg)"}}>
+                <Header teams={this.state.teams} />
                 <RouteHandler />
             </div>
         );
