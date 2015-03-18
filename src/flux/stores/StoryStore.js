@@ -45,6 +45,20 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
         return self._get_promises[storyId];
     },
 
+    addLabel: function(storyId, projectId, label){
+        var self = this;
+
+        return request.post('/api/story/' + storyId + '/add-label')
+            .send({project: projectId, label: label})
+            .set({'Accept': 'application/json'})
+            .promise()
+            .then(function(resp){
+                self.stories[storyId] = null; // clear local cache
+                self.emitChange();
+                return true;
+            });
+    },
+
     emitEvent: function(event) {
         this.emit(event);
     },

@@ -22,6 +22,30 @@ var StoryApi = function(router){
             response.send(ret);
         }); 
     });
+
+    router.route('/story/:storyId/add-label').post(function(req, response){
+        //console.log('StoryApi#post /story/:storyId/add-label req', req);
+        var storyId = req.params.storyId;
+        var projectId = req.body.project;
+        var label = req.body.label;
+
+        var ret = {
+            storyId: storyId,
+            projectId: projectId,
+            label: label
+        };
+
+
+
+        PivotalHelper.post('/projects/' + projectId + '/stories/' + storyId + '/labels')
+        .send({name: label})
+        .promise()
+        .then(function(res){
+            ret.data = res;
+            response.send(ret);
+        });
+
+    });
 };
 
 _.assign(StoryApi.prototype, {

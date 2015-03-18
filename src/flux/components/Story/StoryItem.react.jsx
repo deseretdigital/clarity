@@ -38,11 +38,14 @@ var StoryItem = React.createClass({
     var state = '';
     var strLabels = '';
     var qaBar = '';
+    var project = ''; // Pivotal Project ID
 
     if(this.props.data && this.props.data.id)
     {
       title = this.props.data.name;
       state = this.props.data.current_state;
+      project = this.props.data.project_id;
+
       var labels = self._getLabels(this.props.data.labels);
       var strLabels = labels.join(', ');
 
@@ -51,7 +54,6 @@ var StoryItem = React.createClass({
       });
 
       classes.push('state-' + state);
-
     }
 
     return (
@@ -61,7 +63,7 @@ var StoryItem = React.createClass({
           <h4 className="title">[<a href={"https://www.pivotaltracker.com/story/show/" + this.props.id} target="_blank">#{this.props.id}</a>] {title}</h4>
           <div className="labels"><strong>Labels:</strong> {strLabels}</div>
         </div>
-        <StoryQaBar id={this.props.id} context={this.props.context} labels={labels} storyState={state} />
+        <StoryQaBar id={this.props.id} project={project} context={this.props.context} labels={labels} storyState={state} />
       </div>
     );
   }
