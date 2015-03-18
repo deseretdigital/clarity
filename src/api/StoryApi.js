@@ -31,13 +31,24 @@ var StoryApi = function(router){
             storyIds: storyIds
         };
 
-        Promise.map(storyIds, function(storyId){
-            return self.getStory(storyId);
-            }, { concurrency: 10 })
-            .then(function(stories){
-                ret.data = stories;
-                response.send(ret);         
+        var urls = _.map(storyIds, function(storyId){
+            return '/services/v5/stories/' + storyId;
+        });
+
+        PivotalHelper.post('/aggregator')
+        .send(urls)
+        .promise()
+        .then(function(res){
+            _.forEach(JSON.parse(res.text), function(individualResponse){
+                if(individualResponse && individualResponse.id)
+                {
+                    stories[individualResponse.id] = individualResponse;
+                }
             });
+
+            ret.data = stories;
+            response.send(ret);
+        });
     });
 
     router.route('/story/:storyId/add-label').post(function(req, response){
