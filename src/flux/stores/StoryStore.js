@@ -93,6 +93,8 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
 
     getManyCached: function(storyIds)
     {
+        var self = this;
+        
         // Get all story objects and return them, chaching!
         var returnStories = {};
 
