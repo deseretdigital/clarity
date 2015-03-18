@@ -22,10 +22,6 @@ var appServer = 'http://127.0.0.1:' + port;
 console.log('bin/server.js appServer', appServer);
 
 
-
-
-
-
 Promise.longStackTraces();
 
 
@@ -41,6 +37,7 @@ app.use('/api', ApiRouter);
 app.use('/examples', express.static(__dirname + '/../examples'));
 app.use('/img', express.static(__dirname + '/../img'));
 
+// Pretty JSON in API Responses, makes debugging much easier
 app.set('json spaces', 2);
 
 /**
