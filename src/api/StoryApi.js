@@ -3,6 +3,7 @@ var request = require('superagent');
 //var ApiHelper = require('./ApiHelper');
 var ConfigHelper = require('../helpers/ConfigHelper');
 var PivotalHelper = require('../helpers/PivotalHelper');
+var Promise = require('bluebird');
 
 var StoryApi = function(router){
     var self = this;
@@ -15,12 +16,28 @@ var StoryApi = function(router){
             storyId: storyId
         }
 
-        PivotalHelper.get('/stories/' + storyId)
-        .promise()
-        .then(function(res){
-            ret.data = JSON.parse(res.text);
-            response.send(ret);
-        }); 
+        this.getStory(storyId)
+            .then(function(story){
+                ret.data = story;
+                response.send(ret);
+            });
+    });
+
+    router.route('/story/bulk-retrieve').post(function(req, response){
+        var stories = {};
+        var storyIds = req.body.storyIds;
+
+        var ret = {
+            storyIds: storyIds
+        };
+
+        Promise.map(storyIds, function(storyId){
+            return self.getStory(storyId);
+            }, { concurrency: 10 })
+            .then(function(stories){
+                ret.data = stories;
+                response.send(ret);         
+            });
     });
 
     router.route('/story/:storyId/add-label').post(function(req, response){
@@ -36,7 +53,6 @@ var StoryApi = function(router){
         };
 
 
-
         PivotalHelper.post('/projects/' + projectId + '/stories/' + storyId + '/labels')
         .send({name: label})
         .promise()
@@ -44,12 +60,18 @@ var StoryApi = function(router){
             ret.data = res;
             response.send(ret);
         });
-
     });
 };
 
 _.assign(StoryApi.prototype, {
-    
+    getStory: function(storyId){
+        return PivotalHelper.get('/stories/' + storyId)
+        .promise()
+        .then(function(res){
+            return JSON.parse(res.text);
+        }); 
+    }
+
 });
 
 module.exports = StoryApi;

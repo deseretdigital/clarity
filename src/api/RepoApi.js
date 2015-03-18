@@ -310,7 +310,7 @@ _.assign(RepoApi.prototype, {
             GitHubClient.releases.listReleases({
                 owner: orgName,
                 repo: repoName,
-                per_page: 10
+                per_page: 6
             }, function(err, res){
                 if(err){
                     return reject(err);

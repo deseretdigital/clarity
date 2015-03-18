@@ -45,6 +45,64 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
         return self._get_promises[storyId];
     },
 
+    /**
+     * We want to allow grabbing out of the cache directly because
+     * get(storyId) will kick off a request if it doesn't exist.
+     * However, many requests go through getMany, so we don't
+     * want to duplicate requesting the data.
+     */
+    getCached: function(storyId){
+        if(this.stories[storyId])
+        {
+            return this.stories[storyId];
+        }
+
+        return null;
+    },
+
+    getMany: function(storyIds){
+        var self = this;
+
+        // Get only ones we haven't cached yet.
+        var neededStoryIds = _.filter(storyIds, function(storyId){
+            return !self.stories[storyId];
+        }).map(function(storyId){
+            return storyId;
+        });
+
+        if(neededStoryIds.length <= 0)
+        {
+            return Promise.resolve(self.getManyCached(storyIds));
+        }
+
+        return request.post('/api/story/bulk-retrieve')
+            .send({storyIds: neededStoryIds})
+            .set({'Accept': 'application/json'})
+            .promise()
+            .then(function(resp){
+                var stories = resp.body.data;
+                
+                // Store Stories in cache
+                _.forEach(stories, function(story){
+                    self.stories[story.id] = story;
+                });
+
+                return self.getManyCached(storyIds);
+            });
+    },
+
+    getManyCached: function(storyIds)
+    {
+        // Get all story objects and return them, chaching!
+        var returnStories = {};
+
+        _.forEach(storyIds, function(storyId){
+            returnStories[storyId] = self.stories[storyId];
+        });
+
+        return returnStories;
+    },
+
     addLabel: function(storyId, projectId, label){
         var self = this;
 
@@ -54,8 +112,12 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
             .promise()
             .then(function(resp){
                 self.stories[storyId] = null; // clear local cache
-                self.emitChange();
-                return true;
+                
+                // Don't emit just yet, let the get action emit and force an update.
+                //self.emitChange();
+                
+                // return promise of when the new one should be loaded
+                return self.get(storyId);
             });
     },
 

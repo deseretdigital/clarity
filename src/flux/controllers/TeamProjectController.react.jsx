@@ -391,17 +391,11 @@ var TeamProjectController = React.createClass({
 
     // Same as the diffs, we're going to load these lazily
     _buildState_getStories: function(state){
-        var stories = {};
+        // Kick off the promise to get all these story ids
+        // but don't wait for it.
+        StoryStore.getMany(state.storyIds);
 
-        _.forEach(state.storyIds, function(storyId){
-            var storyPromise = StoryStore.get(storyId);
-            if(storyPromise.isFulfilled())
-            {
-                stories[storyId] = storyPromise.value();
-            }
-        });
-
-        return Promise.resolve(stories);
+        return StoryStore.getManyCached(state.storyIds);
     },
     _onChange_queued: false,
     _onChange_deferredCount: 0,
