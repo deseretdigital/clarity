@@ -16,7 +16,7 @@ var StoryApi = function(router){
             storyId: storyId
         }
 
-        this.getStory(storyId)
+        self.getStory(storyId)
             .then(function(story){
                 ret.data = story;
                 response.send(ret);
