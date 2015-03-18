@@ -60,8 +60,18 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
         return null;
     },
 
+    _getMany_promise: null,
     getMany: function(storyIds){
         var self = this;
+
+        // If a getMany is already running, return that promise instead
+        // and chain on the initial request instead.
+        if(self._getMany_promise)
+        {
+            return self._getMany_promise.then(function(){
+                return self.getMany(storyIds);
+            });
+        }
 
         // Get only ones we haven't cached yet.
         var neededStoryIds = _.filter(storyIds, function(storyId){
@@ -75,11 +85,13 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
             return Promise.resolve(self.getManyCached(storyIds));
         }
 
-        return request.post('/api/story/bulk-retrieve')
+        self._getMany_promise = request.post('/api/story/bulk-retrieve')
             .send({storyIds: neededStoryIds})
             .set({'Accept': 'application/json'})
             .promise()
             .then(function(resp){
+                self._getMany_promise = null;
+                
                 var stories = resp.body.data;
                 
                 // Store Stories in cache
@@ -89,12 +101,14 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
 
                 return self.getManyCached(storyIds);
             });
+
+        return self._getMany_promise;
     },
 
     getManyCached: function(storyIds)
     {
         var self = this;
-        
+
         // Get all story objects and return them, chaching!
         var returnStories = {};
 
