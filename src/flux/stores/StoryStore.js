@@ -91,13 +91,15 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
             .promise()
             .then(function(resp){
                 self._getMany_promise = null;
-                
+
                 var stories = resp.body.data;
                 
                 // Store Stories in cache
                 _.forEach(stories, function(story){
                     self.stories[story.id] = story;
                 });
+
+                self.emitChange();
 
                 return self.getManyCached(storyIds);
             });
