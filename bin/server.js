@@ -57,6 +57,6 @@ var server = app.listen(port, function() {
     var host = server.address().address
     var port = server.address().port
 
-    console.log('National listening at http://%s:%s', host, port);
+    console.log('Clarity listening at http://%s:%s', host, port);
     console.log('appServer: ', appServer);
 });
