@@ -7,7 +7,7 @@ var PullReq = React.createClass({
         var pullReq = this.props.pullReq;
         
         var repo = pullReq.head.repo.name; 
-        var url = pullReq.url;
+        var url = pullReq.html_url;
         var number = pullReq.number; 
         var title = pullReq.title;
         var created = moment(pullReq.created_at).fromNow();
