@@ -33,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
  * Static routes (/dist folder)
  */
 app.use('/static',express.static(__dirname + '/../dist'));
+app.use('/',express.static(__dirname + '/../dist'));
 app.use('/favicon.ico',express.static(__dirname + '/../dist/favicon.ico'));
 app.use('/api', ApiRouter);
 app.use('/examples', express.static(__dirname + '/../examples'));
