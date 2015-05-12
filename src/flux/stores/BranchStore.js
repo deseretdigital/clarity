@@ -20,7 +20,7 @@ BranchStore.prototype = merge(EventEmitter.prototype, {
         {
             var foundBranch = null;
             _.forEach(self.branches[repoName], function(branch){
-                if(branch.name == branchName)
+                if(branch.name === branchName)
                 {
                     foundBranch = branch;
                 }
@@ -38,7 +38,7 @@ BranchStore.prototype = merge(EventEmitter.prototype, {
                         foundBranch = branch;
                     }
                 });
-                
+
                 return foundBranch;
             });
     },

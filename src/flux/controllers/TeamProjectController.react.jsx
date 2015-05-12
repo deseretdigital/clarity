@@ -70,7 +70,7 @@ var TeamProjectController = React.createClass({
         {
             this.replaceState({ loadProgress: 1 });
         }
-        
+
         this._onChange();
     },
     render: function(){
@@ -103,7 +103,7 @@ var TeamProjectController = React.createClass({
                     <ReleaseList releases={this.state.releases} project={this.state.project} stories={this.state.stories} />
                 </div>
             </div>
-        
+
         );
     },
     _updateProgress: function(progress){
@@ -141,18 +141,18 @@ var TeamProjectController = React.createClass({
 
                 // Doing repos, releases, and pullReqs in parallel
                 var promises = [
-                    self._buildState_getRepos(state).then(function(repos){ 
+                    self._buildState_getRepos(state).then(function(repos){
                         self._updateProgress(15);
-                        state.repos = repos; 
+                        state.repos = repos;
                     }),
-                    self._buildState_getLatestReleases(state).then(function(latestReleases){ 
+                    self._buildState_getLatestReleases(state).then(function(latestReleases){
                         self._updateProgress(20);
-                        state.latestReleases = latestReleases; 
+                        state.latestReleases = latestReleases;
                     }),
-                    self._buildState_getPullReqs(state).then(function(pullReqs){ 
+                    self._buildState_getPullReqs(state).then(function(pullReqs){
                         self._updateProgress(20);
 
-                        state.pullReqs = pullReqs; 
+                        state.pullReqs = pullReqs;
                     })
                 ];
 
@@ -180,7 +180,7 @@ var TeamProjectController = React.createClass({
             state.stories = stories;
             return self._buildState_getReleases(state);
         }).then(function(releases){
-            state.releases = releases;    
+            state.releases = releases;
 
             // We're going to run and get the next batch of Stories
             // We do this so the HTTP requests of the high priorities
@@ -216,7 +216,7 @@ var TeamProjectController = React.createClass({
 
         _.forEach(state.project.repoNames, function(repoName){
             var releasePromise = ReleaseStore.getLatest(repoName).then(function(latestRelease){
-                collectedReleases.push(latestRelease); 
+                collectedReleases.push(latestRelease);
             });
 
             promises.push(releasePromise);
@@ -250,7 +250,7 @@ var TeamProjectController = React.createClass({
         });
 
         return Promise.all(promises).then(function(){
-            return collectedPullReqs;    
+            return collectedPullReqs;
         });
     },
     _buildState_getBranches: function(state){
@@ -299,7 +299,7 @@ var TeamProjectController = React.createClass({
 
         _.forEach(state.project.repoNames, function(repoName){
             // Get the latest release for this repo
-            var release = _.filter(state.latestReleases, function(release){ 
+            var release = _.filter(state.latestReleases, function(release){
                 if(release.repo == repoName)
                 {
                     return release;
@@ -313,8 +313,8 @@ var TeamProjectController = React.createClass({
             var masterPromise = BranchStore
                 .get(repoName, masterName)
                 .then(function(masterBranch){
-                    //console.log("TeamProjectController#_buildState_getMaster masterBranch", masterBranch);
-                    masters[repoName] = masterBranch;
+                    masters[repoName] = masterBranch || {};
+                    console.log('Masters',masters);
 
                     return DiffStore.getSimple(repoName, release.tag_name, masterName).then(function(diff){
                         // Assign storyIds to state list so they can get looked up
@@ -338,7 +338,7 @@ var TeamProjectController = React.createClass({
      */
     _buildState_getPullReqDiffs: function(state){
         //console.log("TeamProjectController#_buildState_getPullReqDiffs", state);
-        
+
         _.forEach(state.pullReqs, function(pullReqBranches){
             _.forOwn(pullReqBranches, function(pullReq, repoName){
                 // Grab Diffs, but don't wait for them since they can take a longer time.
@@ -380,7 +380,7 @@ var TeamProjectController = React.createClass({
                                 state.storyIds = _.assign(state.storyIds, currentRelease.diff.storyIds);
                             }
                         }
-                    });       
+                    });
                 });
         });
 
