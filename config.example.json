@@ -1,0 +1,37 @@
+{
+    "settings": {
+
+    },
+    "teams": [
+        {
+            "name": "example",
+            "display": "Example",
+            "projects": [
+                "example-project"
+            ]
+        },
+    ],
+
+    "projects": [
+        {
+            "name": "example-project",
+            "display": "Example project",
+            "repoNames": [
+                "example-repo"
+            ],
+            "pivotalProjectIds": [
+                "000000"
+            ],
+            "stageUrlPrefix": "https://",
+            "stageUrlPostfix": ".stage.example.com/",
+            "stageMasterUrl": "https://stage.example.com/"
+        }
+    ],
+    "github": {
+        "orgName": "example",
+        "token": "example_token"
+    },
+    "pivotal": {
+        "token": "example_pivotal_token"
+    }
+}
