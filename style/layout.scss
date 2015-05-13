@@ -1,9 +1,11 @@
+$responsive-break-point: 1024px;
+
 #app * {
     box-sizing: border-box;
 }
 
 #home {
-    
+
   text:#fff;
 
   h2 {
@@ -17,23 +19,11 @@
   }
 }
 
-#main {
-    position: fixed;
-    top: 60px;
-    right: 0;
-    left: 200px;
-    bottom: 0px;
-    padding:20px;
-    background: #fff;
-    overflow: scroll;
-    /* margin-left:200px;
-    min-height: 100%; */
-}
 
 #app {
      height:100%;
       width:100%;
-      background: url(/img/clarity-bg-7.jpg) #000 no-repeat center center fixed; 
+      background: url(/img/clarity-bg-7.jpg) #000 no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -42,79 +32,311 @@
 
 #clarityApp #app .transparentHome {
     background:transparent;
-    
 
-   
+
+
 }
 
 #app a {
    outline: 0;
 }
 
-#app header {
-    height:60px;
-    background: transparent;
-    box-sizing: border-box;
-
-    .homeLink {
-        float:left;
-        display: block;
-        width:200px;
-        height:60px;
-        color: #ffffff;
-        weight:bold;
-        text-decoration: none;
-        padding-top:17px;
-        font-size: 30px;
-        font-weight: bold;
-        font-family: sans-serif;
-        text-transform: uppercase;
-        text-align: center;
-
-    }
-
-    .teamList {
-        float: left;
-        width: 100px;
-        height:60px;
-        padding-top:20px;
-        padding-right:10px;
-        text-align: right;
-        font-size: 18px;
-        color:#fff;
-    }
-
-    ul {
-        list-style: none;
-        margin:0;
-        padding:0;
-
-        li {
-            float:left;
-            height:60px;
-            
-            a {
-                display: block;
-                height: 60px;
-                padding:22px 20px 0 20px;
-                text-decoration: none;
-                color:#fff;
-                
-                &:hover {
-                    background: #333;
-                }
-
-                &.active, &.active:hover {
-                    color:#fff;
-                    background: #1f8dd6;
+#app {
+    display: flex;
+    flex-direction: column;
+    header {
+        padding: 0;
+        display: flex;
+        background: transparent;
+        box-sizing: border-box;
+        border: 0;
+        .header__home-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 30px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            width: 200px;
+            padding: .5rem 0;
+        }
+        .teams-list {
+            flex: 4;
+            display: flex;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            @media (max-width: $responsive-break-point) {
+                font-size: 12px;
+            }
+            &__item {
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                a {
+                    flex: 1;
+                    display: flex;
+                    color: #fff;
+                    text-decoration: none;
+                    align-items: center;
+                    padding: 0 1.5rem;
+                    &:hover {
+                        background: RGBA(0,0,0,0.2);
+                    }
+                    &.active, &.active:hover {
+                        background: #1f8dd6;
+                    }
                 }
             }
+        }
+    }
+    #layout {
+        flex: 1;
+        display: flex;
+        @media (max-width: $responsive-break-point) {
+            flex-direction: column;
+        }
 
-
+        /*
+        The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that
+        appears on the left side of the page.
+        */
+        #menu {
+            width: 200px;
+            @media (max-width: $responsive-break-point) {
+                width: auto;
+            }
+            z-index: 1000; /* so the menu or its navicon stays above all content */
+            /* background: #191818; */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            a {
+                color: #fff;
+                border: none;
+                padding: 0.6em 0 0.6em 0.6em;
+            }
+            li {
+                a {
+                    border-left: 10px solid transparent;
+                    &:hover {
+                        border-left: 10px solid #1f8dd6;
+                        background: transparent;
+                    }
+                    &.active {
+                        border-left:10px solid #2bbb1c;
+                        color: #fff;
+                        background-color: rgba(0,0,0,0.5);                    }
+                }
+            }
+            .pure-menu-heading {
+                font-size: 110%;
+                color: #fff;
+                margin: 0;
+            }
+        }
+        #main {
+            flex: 1;
+            background: white;
+            padding: 1rem;
+        }
+        h4 {
+            font-size: 15px;
         }
     }
 }
+.team-project {
+    &__header {
+        display: flex;
+        flex-direction: column;
+        flex: auto;
+        h1 {
+            font-size: 24px;
+            font-weight: 100;
+            padding: 0 1rem 0 0;
+        }
+    }
+    &__main {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    &__prs {
+        &--open {
+            flex: 1;
+        }
+    }
+    &__release-stories {
+        flex: 1;
+        margin: 0 .5rem;
+    }
+    &__latest-releases {
+        background: #606060;
+        flex: 1;
+        padding: 1rem;
+        color: #d0d0d0;
+        h2 {
+            color: white;
+            font-weight: 200;
+            margin: 0;
+        }
+    }
+    &__releases {
 
+    }
+}
+.pull-request-list {
+}
+.pull-request {
+    &__header {
+        @media (max-width: $responsive-break-point) {
+            flex-direction: column;
+        }
+        padding: .5rem;
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+    }
+    &__title {
+        flex: auto;
+        font-weight: normal;
+    }
+    &__name {
+        font-weight: bold;
+    }
+    &__links {
+        text-align: right;
+        a {
+            font-weight: bold;
+            color: rgb(34, 126, 170);
+        }
+    }
+    a {
+        text-decoration: none;
+    }
+    border: 4px solid #d0d0d0;
+    border-width: 8px 0 4px 0;
+    margin: 0 0 1.5rem 0;
+    background: #d0d0d0;
+}
+.pull-request-branch {
+    background-color: #354459;
+    background-image: url('/img/bg-pull-request.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    &__main {
+        background: RGBA(255,255,255,0.5);
+        color: #f0f0f0;
+        overflow: auto;
+        z-index: 100;
+        padding: .5rem;
+    }
+
+    a {
+        color: navy;
+        font-weight: bold;
+        text-decoration: none;
+        &:hover {
+            color: RGBA(0,90,70,0.9);
+        }
+    }
+    h3, h4, h5 {
+        margin:5px 0 5px 0;
+    }
+    &__summary {
+        font-size: 12px;
+        &-details {
+            p {
+                margin: .25rem 0;
+                strong {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+.story {
+    &__main {
+        background-color: RGBA(255,255,255,0.7);
+        font-size: 13px;
+        color: #333;
+        p {
+            padding: .5rem;
+            margin: 0;
+        }
+    }
+    &__header {
+
+        @media (max-width: $responsive-break-point) {
+            flex-direction: column;
+        }
+        display: flex;
+        background-color: RGBA(255,255,255,0.4);
+        color: #303030;
+        padding: .5rem;
+        a {
+            color: #3030aa;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+    &__title {
+        flex: auto;
+        font-size: 14px;
+    }
+    &__state {
+        align-self: flex-end;
+        width: 80px;
+        font-size: 12px;
+        text-align: right;
+        font-weight: bold;
+        color: RGBA(0,0,0,0.8);
+    }
+}
+.team-menu {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: $responsive-break-point) {
+        width: auto;
+        flex-direction: row;
+        .menu {
+            padding-right: 1rem;
+        }
+    }
+}
+.menu {
+    ul {
+    margin: 0 0 1rem 0;
+    padding: 0;
+
+    }
+    &__title {
+        font-weight: bold;
+        color: white;
+        background-color: RGBA(0,0,0,0.4);
+        padding: 1rem;
+    }
+    &__item {
+        display: block;
+        margin: 0;
+        font-size: 16px;
+        a {
+            display: block;
+            padding: .5rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-left: 8px solid transparent;
+            &.active {
+                border-left: 8px solid #2bbb1c;
+            }
+            &:hover {
+                background: RGBA(0,0,0,0.3);
+            }
+        }
+    }
+}
 .aheadBehindBar {
   background: #ddd;
   width:100%;
@@ -145,16 +367,53 @@
     }
   }
 }
+/* Master */
+.master {
+    background-color: #354459;
+    background-image: url('/img/bg-master.png');
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    background-size: 20px;
+    padding:0px 0px 0px 25px;
+    margin-bottom: 5px;
+    &__main {
+        background: white;
+        overflow: auto;
+        z-index: 100;
+        padding: 5px 10px 5px 10px;
+        font-size: 14px;
+    }
+    h3, h4 ,h5 {
+        margin: .5rem 0;
+        color: black;
+    }
+    &__release-notes {
+        background: white;
+        margin: .5rem 0;
+        padding: 1rem;
+        color: black;
+        a {
+            color: #00c;
+            text-decoration: none;
+        }
+    }
+}
+
+.content-subhead {
+    font-weight: 300;
+    color: #888;
+}
+
 
 /* Spinner Loader */
-.meter { 
+.meter {
     height: 20px;  /* Can be anything */
     position: relative;
     background: #555;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
     border-radius: 25px;
-    
+
     /* box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3); */
 }
 
@@ -171,7 +430,7 @@
     rgb(43,194,83) 37%,
     rgb(84,240,84) 69%
   );
-  /* box-shadow: 
+  /* box-shadow:
     inset 0 2px 9px  rgba(255,255,255,0.3),
     inset 0 -2px 6px rgba(0,0,0,0.4); */
   position: relative;
@@ -183,13 +442,13 @@
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   background-image: linear-gradient(
-    -45deg, 
-    rgba(255, 255, 255, .2) 25%, 
-    transparent 25%, 
-    transparent 50%, 
-    rgba(255, 255, 255, .2) 50%, 
-    rgba(255, 255, 255, .2) 75%, 
-    transparent 75%, 
+    -45deg,
+    rgba(255, 255, 255, .2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, .2) 50%,
+    rgba(255, 255, 255, .2) 75%,
+    transparent 75%,
     transparent
   );
   z-index: 1;

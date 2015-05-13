@@ -20,14 +20,14 @@ function getImage() {
 
 var AppController = React.createClass({
     mixins: [ Router.State, ReactAsync.Mixin ],
-    
+
 
     getDefaultProps: function(){
         return {
             randomImage:  getImage()
         };
     },
-    
+
     /* getInitialState: function() {
         var state = this._buildState();
         return state;
@@ -38,16 +38,9 @@ var AppController = React.createClass({
             teams: {}
         };
 
-        console.log("-----------------------------------------------------------");
-        console.log("getInitialStateAsync Called");
-        console.log("-----------------------------------------------------------");
-
         TeamStore.getAll()
             .then(function(allTeams){
                 state.teams = allTeams;
-                console.log("-----------------------------------------------------------");
-                console.log("AppController#getInitialStateAsync returning state", state);
-                console.log("-----------------------------------------------------------");
                 cb(null, state);
             });
     },
@@ -55,7 +48,7 @@ var AppController = React.createClass({
         TeamStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
-        
+
         TeamStore.removeChangeListener(this._onChange);
     },
     render: function(){

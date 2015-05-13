@@ -7,7 +7,7 @@ var Promise = require('bluebird');
 var PullReqsListItem = require('./PullReqsListItem.react');
 
 var PullReqsList = React.createClass({
-    
+
     getDefaultProps: function(){
         return {
             pullReqs: {},
@@ -15,7 +15,7 @@ var PullReqsList = React.createClass({
             stories: {}
         };
     },
-    
+
     getInitialState: function() {
         return {};
     },
@@ -23,12 +23,12 @@ var PullReqsList = React.createClass({
         //PageStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
-        
+
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function(){
         var self = this;
-        console.log("components/Team/PullReqsList.react#render this.props ", this.props);
+        // console.log("components/Team/PullReqsList.react#render this.props ", this.props);
 
         var htmlPullReqs = [];
 
@@ -36,19 +36,19 @@ var PullReqsList = React.createClass({
 
         _.forOwn(this.props.pullReqs, function(pullReqData, pullReqName){
             var html = (
-                <PullReqsListItem 
-                    pullReqData={pullReqData} 
-                    pullReqName={pullReqName} 
+                <PullReqsListItem
+                    pullReqData={pullReqData}
+                    pullReqName={pullReqName}
                     project={self.props.project}
                     aheadBehindStats={aheadBehindStats}
                     stories={self.props.stories} />
             );
 
-            htmlPullReqs.push(html); 
+            htmlPullReqs.push(html);
         });
 
         return (
-            <div id="pullRequests">
+            <div className="pull-request-list">
                 {htmlPullReqs}
             </div>
         );

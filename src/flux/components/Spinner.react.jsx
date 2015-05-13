@@ -10,12 +10,10 @@ var Spinner = React.createClass({
 
     getInitialState: function(){
         return {
-            
+
         };
     },
     render: function(){
-        console.log("Spinner#render this.props", this.props);
-
         if(this.props.progress <= 0)
         {
             return <div></div>;
@@ -27,7 +25,7 @@ var Spinner = React.createClass({
             width: progress + '%'
         }
 
-        
+
 
         return (
             <div className="spinner">

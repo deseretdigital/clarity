@@ -6,13 +6,13 @@ var request = require('superagent-bluebird-promise');
 
 
 var StoryStore = function(){
-    console.log("BranchStore constructor called");
+    // console.log("BranchStore constructor called");
     /**
-    Simple Diffs are summarized and formated on the API side since it cuts down extensively 
+    Simple Diffs are summarized and formated on the API side since it cuts down extensively
     on the network traffic. Extended Diffs are the full response from GitHub
     **/
     this.stories = {};
-    
+
     this._get_promises = {};
 };
 
@@ -93,7 +93,7 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
                 self._getMany_promise = null;
 
                 var stories = resp.body.data;
-                
+
                 // Store Stories in cache
                 _.forEach(stories, function(story){
                     self.stories[story.id] = story;
@@ -130,10 +130,10 @@ StoryStore.prototype = merge(EventEmitter.prototype, {
             .promise()
             .then(function(resp){
                 self.stories[storyId] = null; // clear local cache
-                
+
                 // Don't emit just yet, let the get action emit and force an update.
                 //self.emitChange();
-                
+
                 // return promise of when the new one should be loaded
                 return self.get(storyId);
             });

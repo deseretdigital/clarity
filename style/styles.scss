@@ -57,7 +57,7 @@
 
 .pullRequest .prInside {
     background:#dbf1fd;
-    overflow: auto; 
+    overflow: auto;
     z-index: 100;
     padding: 5px 10px 5px 10px;
 }
@@ -78,12 +78,12 @@
 
 .prBranch .prbInside {
     background:#d7dade;
-    overflow: auto; 
+    overflow: auto;
     z-index: 100;
     padding: 5px 10px 5px 10px;
 }
 
-.prBranch .summary div { float: left; padding:0 8px 0 0; font-size:14px;}
+.prBranch .summary div { float: left; padding:0 8px 0 0; font-size:13px;}
 
 .prBranch .details {
     clear:both;
@@ -91,28 +91,6 @@
     margin:10px;
     padding:10px;
     background:#ffffff;
-}
-
-/* Master */
-.master {
-    background-color: #354459;
-    background-image: url('/img/bg-master.png');
-    background-repeat: no-repeat;
-    background-position: 3px 5px;
-    background-size: 20px;
-    padding:0px 0px 0px 25px;
-    margin-bottom: 5px;
-}
-
-.master .masterInside {
-    background:#d7dade;
-    overflow: auto; 
-    z-index: 100;
-    padding: 5px 10px 5px 10px;
-}
-
-.master h3, .master h4, .master h5, .master h5 {
-    margin:5px 0 5px 0;
 }
 
 /* Releasees */
@@ -129,7 +107,7 @@
 
 .release .releaseInside {
     background:#cecece;
-    overflow: auto; 
+    overflow: auto;
     z-index: 100;
     padding: 5px 10px 5px 10px;
 }
@@ -152,7 +130,7 @@
 
 .commitList .commitListInside {
     background:#dceff5;
-    overflow: auto; 
+    overflow: auto;
     z-index: 100;
     padding: 5px 10px 5px 10px;
     min-height: 80px;
@@ -172,7 +150,7 @@
 
 .storyInside {
     background:#eef3f5;
-    overflow: auto; 
+    overflow: auto;
     z-index: 100;
     padding: 5px 10px 5px 10px;
 }
@@ -268,8 +246,8 @@
 .qaStatus {
     font-size: 12px;
     font-weight: bold;
-    background-color:#999999;
-    color:#ffffff;
+    background-color: RGBA(0,0,0,0.4);
+    color: white;
     padding:3px 3px;
     text-align: left;
     overflow: auto;

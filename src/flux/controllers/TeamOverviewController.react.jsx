@@ -10,7 +10,7 @@ var ProjectStore = require('../stores/ProjectStore');
 
 var TeamOverviewController = React.createClass({
     mixins: [Router.State],
-    
+
     getInitialState: function(){
         return this._getState();
     },
@@ -24,8 +24,6 @@ var TeamOverviewController = React.createClass({
         ProjectStore.removeChangeListener(this._onChange);
     },
     render: function(){
-        console.log("TeamController#render this.getParams()", this.getParams());
-        console.log("TeamController#render this.state", this.state);
         var teamName = this.getParams().teamName;
         return (
             <div className="col-md-12">
@@ -49,18 +47,15 @@ var TeamOverviewController = React.createClass({
 
         if(state.team)
         {
-            console.log("TeamController#_getState state.team", state.team);
             _.forEach(state.team.projects, function(projectName){
 
                 var projectPromise = ProjectStore.get(projectName);
                 if(projectPromise.isFulfilled())
                 {
                     state.projects.push(projectPromise.value());
-                }    
+                }
             });
         }
-
-        console.log("TeamController#_getState returning: ", state);
         return state;
     },
     _onChange: function() {

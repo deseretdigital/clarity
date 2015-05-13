@@ -6,7 +6,7 @@ var request = require('superagent-bluebird-promise');
 
 
 var TeamStore = function(){
-    console.log("TeamStore constructor called");
+    // console.log("TeamStore constructor called");
     this.teams = [];
 };
 
@@ -37,7 +37,7 @@ TeamStore.prototype = merge(EventEmitter.prototype, {
                         foundTeam = team;
                     }
                 });
-                
+
                 return foundTeam;
             });
     },
@@ -63,7 +63,7 @@ TeamStore.prototype = merge(EventEmitter.prototype, {
             .promise()
             .then(function(resp){
                 self._getAll_promise = null;
-                
+
                 self.teams = resp.body.data;
                 self.emitChange();
                 return self.teams;

@@ -6,7 +6,7 @@ var request = require('superagent-bluebird-promise');
 
 
 var ProjectStore = function(){
-    console.log("ProjectStore constructor called");
+    // console.log("ProjectStore constructor called");
     this.projects = [];
 };
 
@@ -37,7 +37,7 @@ ProjectStore.prototype = merge(EventEmitter.prototype, {
                         foundProject = project;
                     }
                 });
-                
+
                 return foundProject;
             });
     },

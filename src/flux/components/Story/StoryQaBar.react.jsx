@@ -26,12 +26,12 @@ var StoryQaBar = React.createClass({
         return {
             context: 'PULL_REQUEST',
             onQaUpdate: function(storyId, projectId, label){
-                console.log("StoryQaBar#props.onQaUpdate params", {
-                    storyId: storyId,
-                    projectId: projectId,
-                    label: label
-                });
-                
+                // console.log("StoryQaBar#props.onQaUpdate params", {
+                //     storyId: storyId,
+                //     projectId: projectId,
+                //     label: label
+                // });
+
                 StoryActions.addLabel(storyId, projectId, label);
             }
         }
@@ -65,16 +65,16 @@ var StoryQaBar = React.createClass({
         if(_.indexOf(sluggedLabels, 'no-qa') >= 0){
             qaMessage = 'no-qa - QA Not Possible for this story';
             qaClass = 'qaNeutral';
-        }   
+        }
         else if(this.props.storyState == 'accepted')
         {
-            
+
             if(_.indexOf(sluggedLabels, qaLabel) < 0){
                 qaMessage = 'missing ' + qaLabel + ' - QA required for this story!';
                 qaClass = 'qaAttention';
                 qaButton = (
-                    <button 
-                        className="pure-button button-success addLabel" 
+                    <button
+                        className="pure-button button-success addLabel"
                         onClick={self.props.onQaUpdate.bind(self, self.props.id, self.props.project, qaLabel)}>
                         Accept QA
                     </button>
@@ -92,13 +92,13 @@ var StoryQaBar = React.createClass({
             qaMessage = 'No QA Step Required Currently';
             qaClass = 'qaNeutral';
         }
-        
+
         return (
             <div className={"qaStatus " + qaClass }>
                 <div className="qaMessage"><strong>QA:</strong> {qaMessage}</div>
                 {qaButton}
             </div>
-          
+
         );
     }
 });
