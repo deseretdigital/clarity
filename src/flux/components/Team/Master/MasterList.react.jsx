@@ -80,7 +80,7 @@ var MasterList = React.createClass({
                         {htmlStories}
                     </div>
                     <div className="master__release-notes">
-                        <h4>Release notes:</h4>
+                        <h4>Summary:</h4>
                         {htmlStoryNotes}
                     </div>
                 </div>
