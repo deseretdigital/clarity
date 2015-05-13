@@ -87,19 +87,21 @@ var TeamProjectController = React.createClass({
 
 
         return (
-            <div className="col-md-12">
-                <div className="header">
-                    <h1>Project: {projectDisplay}</h1>
-                    <LatestRelease releases={this.state.latestReleases} />
+            <div className="team-project">
+                <div className="team-project__header">
+                    <h1 className="team-project__project-name">Project: {projectDisplay}</h1>
+                    <LatestRelease releases={this.state.latestReleases} className="team-project__latest-releases" />
                 </div>
-                <div className="pure-u-1-2" style={{"padding-right":"10px;"}}>
-                    <PullReqsHeader pullReqsCount={_.keys(this.state.pullReqs).length}/>
-                    <PullReqsList pullReqs={this.state.pullReqs} branches={this.state.branches} project={this.state.project} stories={this.state.stories} />
+                <div className="team-project__main">
+                    <div className="team-project__prs--open">
+                        <PullReqsHeader pullReqsCount={_.keys(this.state.pullReqs).length}/>
+                        <PullReqsList pullReqs={this.state.pullReqs} branches={this.state.branches} project={this.state.project} stories={this.state.stories} />
+                    </div>
+                    <div className="team-project__release-stories">
+                        <MasterList masters={this.state.masters} project={this.state.project} stories={this.state.stories} />
+                    </div>
                 </div>
-                <div className="pure-u-1-2">
-                    <MasterList masters={this.state.masters} project={this.state.project} stories={this.state.stories} />
-                </div>
-                <div className="pure-u-1-1">
+                <div className="team-project__releases">
                     <ReleaseList releases={this.state.releases} project={this.state.project} stories={this.state.stories} />
                 </div>
             </div>
@@ -314,7 +316,6 @@ var TeamProjectController = React.createClass({
                 .get(repoName, masterName)
                 .then(function(masterBranch){
                     masters[repoName] = masterBranch || {};
-                    console.log('Masters',masters);
 
                     return DiffStore.getSimple(repoName, release.tag_name, masterName).then(function(diff){
                         // Assign storyIds to state list so they can get looked up
@@ -410,7 +411,7 @@ var TeamProjectController = React.createClass({
         if(self._onChange_queued)
         {
             self._onChange_deferredCount++;
-            console.log("TeamProjectController#_onChange is already queued, _onChange_deferredCount", self._onChange_deferredCount)
+            // console.log("TeamProjectController#_onChange is already queued, _onChange_deferredCount", self._onChange_deferredCount)
             return;
         }
 

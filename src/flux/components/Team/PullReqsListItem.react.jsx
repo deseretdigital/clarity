@@ -8,14 +8,14 @@ var PullReq = require('./PullReqs/PullReq.react');
 var StoryItem = require('../Story/StoryItem.react');
 
 var PullReqsListItem = React.createClass({
-    
+
     getDefaultProps: function(){
         return {
             pullReqData: {},
             pullReqName: ""
         };
     },
-    
+
     getInitialState: function() {
         return {};
     },
@@ -23,7 +23,7 @@ var PullReqsListItem = React.createClass({
         //PageStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
-        
+
         //PageStore.removeChangeListener(this._onChange);
     },
     render: function(){
@@ -43,7 +43,7 @@ var PullReqsListItem = React.createClass({
             var stageUrl = this.props.project.stageUrlPrefix + pullReqName + this.props.project.stageUrlPostfix
             htmlStageUrl = (
                 <div className="stageUrl">
-                    Stage: <a href={stageUrl} target="_blank">{stageUrl}</a>
+                    <a href={stageUrl} target="_blank">Stage</a>
                 </div>
             );
         }
@@ -66,10 +66,16 @@ var PullReqsListItem = React.createClass({
         });
 
         return (
-            <div className="pullRequest">
-                <div className="prInside">
-                    <h3>{pullReqName}</h3>
-                    {htmlStageUrl}
+            <div className="pull-request">
+                <div className="pull-request__header">
+                    <div className="pull-request__title">
+                        Branch: <span className="pull-request__name">{pullReqName}</span>
+                    </div>
+                    <div className="pull-request__links">
+                        {htmlStageUrl}
+                    </div>
+                </div>
+                <div className="pull-request__main">
                     {htmlPullReqs}
                     {htmlStories}
                 </div>

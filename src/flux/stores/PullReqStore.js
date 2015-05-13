@@ -6,7 +6,7 @@ var request = require('superagent-bluebird-promise');
 
 
 var PullReqStore = function(){
-    console.log("BranchStore constructor called");
+    // console.log("BranchStore constructor called");
     this.pullReqs = {};
     this._getAll_promises = {};
 };
@@ -16,7 +16,7 @@ PullReqStore.prototype = merge(EventEmitter.prototype, {
     getAll: function(repoName) {
         //console.log('BranchStore#getAll Called');
         var self = this;
-        
+
         if(self.pullReqs[repoName])
         {
             return Promise.resolve(self.pullReqs[repoName]);

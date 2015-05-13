@@ -6,7 +6,7 @@ var request = require('superagent-bluebird-promise');
 
 
 var ReleaseStore = function(){
-    console.log("ReleaseStore constructor called");
+    // console.log("ReleaseStore constructor called");
     this.releases = {};
     this._getAll_promises = {};
 };
@@ -24,7 +24,7 @@ ReleaseStore.prototype = merge(EventEmitter.prototype, {
                         foundRelease = release;
                     }
                 });
-                
+
                 return foundRelease;
             });
     },
@@ -63,7 +63,7 @@ ReleaseStore.prototype = merge(EventEmitter.prototype, {
         // If we're already in the middle of a getAll call, return that promise
         if(self._getAll_promises[repoName])
         {
-            console.log("Already running request, here is the promise found: ", self._getAll_promises[repoName]);
+            // console.log("Already running request, here is the promise found: ", self._getAll_promises[repoName]);
             return self._getAll_promises[repoName];
         }
 

@@ -13,7 +13,7 @@ var TeamMenu = require('../components/Team/Menu.react');
 
 var TeamController = React.createClass({
     mixins: [Router.State, ReactAsync.Mixin],
-    
+
     getInitialStateAsync: function(cb){
         var self = this;
         this.initState = true;
@@ -36,8 +36,8 @@ var TeamController = React.createClass({
         this._onChange();
     },
     render: function(){
-        console.log("TeamController#render this.getParams()", this.getParams());
-        console.log("TeamController#render this.state", this.state);
+        // console.log("TeamController#render this.getParams()", this.getParams());
+        // console.log("TeamController#render this.state", this.state);
         var teamName = this.getParams().teamName;
         return (
             <div id="layout">
@@ -62,7 +62,7 @@ var TeamController = React.createClass({
                 return self._buildState_projects(state);
             })
             .then(function(){
-                console.log("TeamController#_buildState finished", state);
+                // console.log("TeamController#_buildState finished", state);
                 return state;
             });
 
@@ -90,7 +90,7 @@ var TeamController = React.createClass({
             return;
         }
 
-        this._buildState() 
+        this._buildState()
             .then(function(state){
                 self.setState(state);
             });

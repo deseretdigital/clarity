@@ -6,7 +6,7 @@ var request = require('superagent-bluebird-promise');
 
 
 var BranchStore = function(){
-    console.log("BranchStore constructor called");
+    // console.log("BranchStore constructor called");
     this.branches = {};
     this._getAll_promises = {};
 };

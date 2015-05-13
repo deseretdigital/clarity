@@ -6,9 +6,9 @@ var request = require('superagent-bluebird-promise');
 
 
 var DiffStore = function(){
-    console.log("BranchStore constructor called");
+    // console.log("BranchStore constructor called");
     /**
-    Simple Diffs are summarized and formated on the API side since it cuts down extensively 
+    Simple Diffs are summarized and formated on the API side since it cuts down extensively
     on the network traffic. Extended Diffs are the full response from GitHub
     **/
     this.simpleDiffs = {};

@@ -16,7 +16,7 @@ var RepoApi = function(router){
         stdTTL: 60 * 15,
         checkperiod: 60 * 5
     });
-    
+
     router.route('/repo/:name').get(function(req, res){
         var orgName = ConfigHelper.config.github.orgName;
         var repoName = req.params.name;
@@ -31,7 +31,7 @@ var RepoApi = function(router){
         self.get(orgName, repoName)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -49,7 +49,7 @@ var RepoApi = function(router){
         self.getPullRequests(orgName, repoName)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -68,7 +68,7 @@ var RepoApi = function(router){
         self.getShaStatus(orgName, repoName, shaHash)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -84,7 +84,7 @@ var RepoApi = function(router){
         self.getBranches(orgName, repoName)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -102,7 +102,7 @@ var RepoApi = function(router){
         self.getBranch(orgName, repoName, branchName)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -118,7 +118,7 @@ var RepoApi = function(router){
         self.getReleases(orgName, repoName)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -136,7 +136,7 @@ var RepoApi = function(router){
         self.getRelease(orgName, repoName, releaseName)
             .then(function(data){
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             });
     });
 
@@ -173,10 +173,10 @@ var RepoApi = function(router){
                 {
                     ret.summary = DiffHelper.format(data);
                 }
-                
+
                 self.cache.set(cacheKey, data, 60 * 30); // Cache for 30 minutes
                 ret.data = data;
-                res.send(ret);        
+                res.send(ret);
             })
             .catch(function(err){
                 ret.err = err;
@@ -196,7 +196,7 @@ _.assign(RepoApi.prototype, {
             if(cached[cacheKey])
             {
                 return resolve(cached[cacheKey]);
-            }    
+            }
 
             GitHubClient.repos.get({
                 user: orgName,
@@ -268,8 +268,8 @@ _.assign(RepoApi.prototype, {
                 user: orgName,
                 repo: repoName
             }, function(err, res){
-                console.log("pre setBranchesCaches");
-                
+                // console.log("pre setBranchesCaches");
+
                 var promises = _.map(res, function(branchRecord){
                     return self.getBranch(orgName, repoName, branchRecord.name);
                 });
@@ -355,10 +355,10 @@ _.assign(RepoApi.prototype, {
                 if(err){
                     return reject(err);
                 }
-                
+
                 return resolve(res);
             });
-        }); 
+        });
     }
 });
 

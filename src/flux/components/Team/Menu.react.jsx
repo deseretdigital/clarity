@@ -5,7 +5,7 @@ var Link = Router.Link;
 var Promise = require('bluebird');
 
 var Header = React.createClass({
-    
+
     getDefaultProps: function(){
         return {
             teamName: '',
@@ -13,35 +13,32 @@ var Header = React.createClass({
             projects: []
         };
     },
-    
     getInitialState: function() {
         return {};
     },
-    componentDidMount: function() {
-        //PageStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount: function() {
-        
-        //PageStore.removeChangeListener(this._onChange);
-    },
     render: function(){
         var self = this;
-        console.log("components/Team/Menu.react#render this.props ", this.props);
+        // console.log("components/Team/Menu.react#render this.props ", this.props);
 
         return (
-            <div id="menu">
-                <div className="pure-menu pure-menu-open">
-                    <a className="pure-menu-heading" href="#">Team Menu</a>
+            <div className="team-menu">
+                <div className="menu">
+                    <div className="menu__title">Team Menu</div>
                     <ul>
-                        <li><Link to="team-overview" params={ {teamName: this.props.teamName} }>Overview</Link></li>
+                        <li className="menu__item"><Link to="team-overview" params={ {teamName: this.props.teamName} }>Overview</Link></li>
                     </ul>
-                    <a className="pure-menu-heading" href="#">Projects</a>
+                </div>
+                <div className="menu">
+                    <div className="menu__title">Projects</div>
                     <ul>
                         {_.map(this.props.projects, function(project){
                             return (
-                                <li key={"team-" + self.props.teamName + "-project-" + project.name}><Link to="team-project" 
+                                <li
+                                    className="menu__item"
+                                    key={"team-" + self.props.teamName + "-project-" + project.name}>
+                                    <Link to="team-project"
                                 params={{
-                                    teamName: self.props.teamName, 
+                                    teamName: self.props.teamName,
                                     projectName: project.name
                                 }}>{project.display}</Link></li>
                             );

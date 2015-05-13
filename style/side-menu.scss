@@ -23,10 +23,6 @@ Add transition to containers so they can push in and out.
 /*
 This is the parent `<div>` that contains the menu and the content area.
 */
-#layout {
-    position: relative;
-    padding-left: 0;
-}
     #layout.active {
         position: relative;
         left: 200px;
@@ -69,96 +65,6 @@ The content `<div>` is where all your content goes.
         margin-top: 0;
     }
 
-.content-subhead {
-    margin: 50px 0 20px 0;
-    font-weight: 300;
-    color: #888;
-}
-
-
-
-/*
-The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that
-appears on the left side of the page.
-*/
-
-#menu {
-    float:left;
-    width: 200px;
-    z-index: 1000; /* so the menu or its navicon stays above all content */
-    /* background: #191818; */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
-    /*
-    All anchors inside the menu should be styled like this.
-    */
-    #menu a {
-        color: #fff;
-        border: none;
-        padding: 0.6em 0 0.6em 0.6em;
-    }
-
-    /*
-    Remove all background/borders, since we are applying them to #menu.
-    */
-     #menu .pure-menu,
-     #menu .pure-menu ul {
-        border: none;
-        background: transparent;
-    }
-
-    #menu .pure-menu ul {
-        border-left: 10px solid transparent;
-    }
-
-    /*
-    Add that light border to separate items into groups.
-    */
-    #menu .pure-menu ul,
-    #menu .pure-menu .menu-item-divided {
-        /* border-top: 1px solid #333; */
-        padding-bottom:2px;
-
-    }
-
-    #menu .pure-menu li {
-        padding-top:2px;
-
-    }
-        /*
-        Change color of the anchor links on hover/focus.
-        */
-        #menu .pure-menu li a {
-            border-left: 10px solid transparent;
-        }
-        #menu .pure-menu li a:hover {
-            border-left: 10px solid #1f8dd6;
-            background: transparent;
-        }
-
-    /*
-    This styles the selected menu item `<li>`.
-    */
-    #menu .pure-menu-heading {
-        /* border-bottom: 4px solid #1f8dd6; */
-    }
-
-    #menu li a.active, #menu li a.active:hover {
-        border-left:10px solid #2bbb1c;
-        color: #fff;
-        background-color: rgba(0,0,0,0.5);
-    }
-        
-
-    /*
-    This styles the menu heading.
-    */
-    #menu .pure-menu-heading {
-        font-size: 110%;
-        color: #fff;
-        margin: 0;
-    }
 
 /* -- Dynamic Button For Responsive Menu -------------------------------------*/
 
@@ -216,33 +122,3 @@ small screens.
 
 
 /* -- Responsive Styles (Media Queries) ------------------------------------- */
-
-/*
-Hides the menu at `48em`, but modify this based on your app's needs.
-*/
-@media (min-width: 48em) {
-
-    .header,
-    .content {
-        padding-left: 2em;
-        padding-right: 2em;
-    }
-
-    #layout {
-        
-        left: 0;
-    }
-    #menu {
-        left: 200px;
-    }
-
-    .menu-link {
-        position: fixed;
-        left: 200px;
-        display: none;
-    }
-
-    #layout.active .menu-link {
-        left: 200px;
-    }
-}
