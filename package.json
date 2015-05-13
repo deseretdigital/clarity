@@ -38,7 +38,8 @@
     "redis": "^0.12.1",
     "superagent": "^0.21.0",
     "superagent-bluebird-promise": "^1.1.1",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "classnames": "^2.1.1"
   },
   "devDependencies": {
     "autoprefixer-loader": "^1.0.0",
