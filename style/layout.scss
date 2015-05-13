@@ -42,14 +42,16 @@ $responsive-break-point: 1024px;
 }
 
 #app {
-    display: flex;
+    display: -webkit-flex; display: flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     header {
+        min-height: 52px;
         padding: 0;
-        display: flex;
+        display: -webkit-flex; display: flex;
         background: transparent;
-        box-sizing: border-box;
         border: 0;
+        height: auto;
         .header__home-link {
             color: #ffffff;
             text-decoration: none;
@@ -61,8 +63,9 @@ $responsive-break-point: 1024px;
             padding: .5rem 0;
         }
         .teams-list {
-            flex: 4;
-            display: flex;
+            flex: 1;
+            -webkit-flex: 1;
+            display: -webkit-flex; display: flex;
             font-size: 16px;
             padding: 0;
             margin: 0;
@@ -70,16 +73,16 @@ $responsive-break-point: 1024px;
                 font-size: 12px;
             }
             &__item {
-                display: flex;
+                display: -webkit-flex; display: flex;
                 text-align: center;
-                justify-content: center;
                 a {
                     flex: 1;
-                    display: flex;
+                    -webkit-flex: 1;
+                    display: -webkit-flex; display: flex;
                     color: #fff;
                     text-decoration: none;
                     align-items: center;
-                    padding: 0 1.5rem;
+                    padding: 1rem 1.5rem;
                     &:hover {
                         background: RGBA(0,0,0,0.2);
                     }
@@ -91,10 +94,11 @@ $responsive-break-point: 1024px;
         }
     }
     #layout {
-        flex: 1;
-        display: flex;
+        flex: 4;
+        display: -webkit-flex; display: flex;
         @media (max-width: $responsive-break-point) {
             flex-direction: column;
+            -webkit-flex-direction: column;
         }
 
         /*
@@ -136,6 +140,7 @@ $responsive-break-point: 1024px;
         }
         #main {
             flex: 1;
+            -webkit-flex: 1;
             background: white;
             padding: 1rem;
         }
@@ -146,9 +151,11 @@ $responsive-break-point: 1024px;
 }
 .team-project {
     &__header {
-        display: flex;
+        display: -webkit-flex; display: flex;
         flex-direction: column;
+        -webkit-flex-direction: column;
         flex: auto;
+        -webkit-flex: auto;
         h1 {
             font-size: 24px;
             font-weight: 100;
@@ -156,22 +163,26 @@ $responsive-break-point: 1024px;
         }
     }
     &__main {
-        display: flex;
+        display: -webkit-flex; display: flex;
         flex-direction: row;
+        -webkit-flex-direction: row;
         flex-wrap: nowrap;
     }
     &__prs {
         &--open {
             flex: 1;
+            -webkit-flex: 1;
         }
     }
     &__release-stories {
         flex: 1;
+        -webkit-flex: 1;
         margin: 0 .5rem;
     }
     &__latest-releases {
         background: #606060;
         flex: 1;
+        -webkit-flex: 1;
         padding: 1rem;
         color: #d0d0d0;
         h2 {
@@ -190,14 +201,16 @@ $responsive-break-point: 1024px;
     &__header {
         @media (max-width: $responsive-break-point) {
             flex-direction: column;
+            -webkit-flex-direction: column;
         }
         padding: .5rem;
         background: #f0f0f0;
-        display: flex;
+        display: -webkit-flex; display: flex;
         justify-content: center;
     }
     &__title {
         flex: auto;
+        -webkit-flex: auto;
         font-weight: normal;
     }
     &__name {
@@ -270,8 +283,9 @@ $responsive-break-point: 1024px;
 
         @media (max-width: $responsive-break-point) {
             flex-direction: column;
+            -webkit-flex-direction: column;
         }
-        display: flex;
+        display: -webkit-flex; display: flex;
         background-color: RGBA(255,255,255,0.4);
         color: #303030;
         padding: .5rem;
@@ -283,6 +297,7 @@ $responsive-break-point: 1024px;
     }
     &__title {
         flex: auto;
+        -webkit-flex: auto;
         font-size: 14px;
     }
     &__state {
@@ -296,11 +311,13 @@ $responsive-break-point: 1024px;
 }
 .team-menu {
     width: 200px;
-    display: flex;
+    display: -webkit-flex; display: flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     @media (max-width: $responsive-break-point) {
         width: auto;
         flex-direction: row;
+        -webkit-flex-direction: row;
         .menu {
             padding-right: 1rem;
         }

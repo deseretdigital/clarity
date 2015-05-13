@@ -600,7 +600,7 @@ table {
     display: -webkit-flex;
     -webkit-flex-flow: row wrap;
 
-    /* IE10 uses display: flexbox */
+    /* IE10 uses display: -webkit-flex; display: flexbox */
     display: -ms-flexbox;
     -ms-flex-flow: row wrap;
 }
