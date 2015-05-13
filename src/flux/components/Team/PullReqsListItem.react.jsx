@@ -40,10 +40,16 @@ var PullReqsListItem = React.createClass({
         var htmlStageUrl = "";
         if(this.props.project && this.props.project.stageUrlPrefix)
         {
-            var stageUrl = this.props.project.stageUrlPrefix + pullReqName + this.props.project.stageUrlPostfix
+            var testHtml = (<span/>);
+            var testUrl = null;
+            if(this.props.project.testUrlPostfix) {
+                var testUrl = this.props.project.testUrlPrefix + pullReqName + this.props.project.testUrlPostfix;
+                testHtml = (<span> | <a href={testUrl} target="_blank">Test</a></span>);
+            }
+            var stageUrl = this.props.project.stageUrlPrefix + pullReqName + this.props.project.stageUrlPostfix;
             htmlStageUrl = (
                 <div className="stageUrl">
-                    <a href={stageUrl} target="_blank">Stage</a>
+                    <a href={stageUrl} target="_blank">Stage</a> {testHtml}
                 </div>
             );
         }
