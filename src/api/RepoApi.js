@@ -174,7 +174,7 @@ var RepoApi = function(router){
                     ret.summary = DiffHelper.format(data);
                 }
 
-                self.cache.set(cacheKey, data, 60 * 30); // Cache for 30 minutes
+                self.cache.set(cacheKey, data, 60); // Cache for 1 minute
                 ret.data = data;
                 res.send(ret);
             })
