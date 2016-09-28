@@ -27,6 +27,7 @@ var StoryItem = React.createClass({
     getDefaultProps: function () {
         return {
             context: 'PULL_REQUEST',
+            data: { name: '', estimate: null },
             displayMode: 'standard'
         }
     },
