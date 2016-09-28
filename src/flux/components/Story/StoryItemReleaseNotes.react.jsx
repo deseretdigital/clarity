@@ -27,7 +27,7 @@ var StoryItem = React.createClass({
         }
     },
     render: function () {
-        const { name, estimate } = typeof this.props.data === 'object' ? this.props.data : {};
+        const { name, estimate, story_type } = typeof this.props.data === 'object' ? this.props.data : {};
         return (
           <tr className="story-row">
             <td className="story-row__type">
