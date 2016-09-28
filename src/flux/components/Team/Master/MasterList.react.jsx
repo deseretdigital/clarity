@@ -54,6 +54,7 @@ var MasterList = React.createClass({
                         <StoryItemReleaseNotes
                             displayMode="release_notes"
                             id={storyId}
+                            key={storyId}
                             data={self.props.stories[storyId]}
                             context={StoryItem.contexts.MASTER}
                         />
