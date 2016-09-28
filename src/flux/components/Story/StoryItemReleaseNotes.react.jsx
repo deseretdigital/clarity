@@ -29,15 +29,18 @@ var StoryItem = React.createClass({
     render: function () {
         const { name, estimate } = typeof this.props.data === 'object' ? this.props.data : {};
         return (
-          <tr>
-            <td className="story__title">
+          <tr className="story-row">
+            <td className="story-row__type">
+                {story_type}
+            </td>
+            <td className="story-row__estimate">
+                {estimate}
+            </td>
+            <td className="story-row__pivotal-link">
                 <a href={"https://www.pivotaltracker.com/story/show/" + this.props.id} target="_blank">#{this.props.id}</a>
             </td>
-            <td>
+            <td className="story-row__name">
                 {name}
-            </td>
-            <td>
-                {estimate}
             </td>
           </tr>
         );
