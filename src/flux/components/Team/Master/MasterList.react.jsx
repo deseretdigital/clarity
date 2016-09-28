@@ -49,7 +49,7 @@ var MasterList = React.createClass({
         });
         var htmlStoryNotes = (
             <table>
-                {_.map(storyIds, function(storyId){
+                {storyIds.map((storyId) => {
                     return (
                         <StoryItemReleaseNotes
                             displayMode="release_notes"
