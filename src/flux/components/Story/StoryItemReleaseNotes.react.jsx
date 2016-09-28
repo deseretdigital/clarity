@@ -19,11 +19,6 @@ var StoryItem = React.createClass({
 
         return text;
     },
-    _getLabels: function (labelsArr) {
-        return _.map(labelsArr, function (label) {
-            return label.name;
-        });
-    },
     getDefaultProps: function () {
         return {
             context: 'PULL_REQUEST',
@@ -32,16 +27,17 @@ var StoryItem = React.createClass({
         }
     },
     render: function () {
+        const { name, estimate } = typeof this.props.data === 'object' ? this.props.data : {};
         return (
           <tr>
             <td className="story__title">
                 <a href={"https://www.pivotaltracker.com/story/show/" + this.props.id} target="_blank">#{this.props.id}</a>
             </td>
             <td>
-                {this.props.data.name}
+                {name}
             </td>
             <td>
-                {this.props.data.estimate}
+                {estimate}
             </td>
           </tr>
         );
