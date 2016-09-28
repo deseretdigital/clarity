@@ -5,6 +5,7 @@ var Link = Router.Link;
 var Promise = require('bluebird');
 
 var StoryItem = require('../../Story/StoryItem.react');
+var StoryItemReleaseNotes = require('../../Story/StoryItemReleaseNotes.react');
 
 var MasterList = React.createClass({
 
@@ -46,16 +47,20 @@ var MasterList = React.createClass({
         var htmlStories = _.map(storyIds, function(storyId){
             return <StoryItem id={storyId} data={self.props.stories[storyId]} context={StoryItem.contexts.MASTER} />;
         });
-        var htmlStoryNotes = _.map(storyIds, function(storyId){
-            return (
-                <StoryItem
-                    displayMode="release_notes"
-                    id={storyId}
-                    data={self.props.stories[storyId]}
-                    context={StoryItem.contexts.MASTER}
-                />
-            );
-        });
+        var htmlStoryNotes = (
+            <table>
+                {_.map(storyIds, function(storyId){
+                    return (
+                        <StoryItemReleaseNotes
+                            displayMode="release_notes"
+                            id={storyId}
+                            data={self.props.stories[storyId]}
+                            context={StoryItem.contexts.MASTER}
+                        />
+                    );
+                })}
+            </table>
+        );
 
         // Commits
         var htmlCommitStats = _.map(this.props.masters, function(master){
