@@ -37,7 +37,10 @@ var StoryItem = React.createClass({
                 <a href={"https://www.pivotaltracker.com/story/show/" + this.props.id} target="_blank">#{this.props.id}</a>
             </td>
             <td>
-                {title}
+                {this.props.data.name}
+            </td>
+            <td>
+                {this.props.data.estimate}
             </td>
           </tr>
         );
