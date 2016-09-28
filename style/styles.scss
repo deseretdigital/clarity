@@ -147,6 +147,12 @@
     padding:0px 0px 0px 25px;
     margin-bottom: 5px;
 }
+.story-row {
+    td {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 2px 5px 2px 5px;
+    }
+}
 
 .storyInside {
     background:#eef3f5;
