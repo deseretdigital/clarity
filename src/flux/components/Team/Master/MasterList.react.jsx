@@ -71,10 +71,21 @@ var MasterList = React.createClass({
             );
         });
 
+        let branchOptions = _.map(this.props.releaseBranches, (branchName) => {
+            return (
+                <option value={branchName}>{branchName}</option>
+            );
+        });
+
 
 
         return (
             <div>
+                <div className="branch-selector" style={{ float:'right' }}>
+                    <select onChange={this.handleBranchBaseChange}>
+                        {branchOptions}
+                    </select>
+                </div>
                 <h2 className="content-subhead">Stories for Release: {_.keys(storyIds).length}</h2>
                 <div className="master">
                     <div className="master__main">
@@ -93,6 +104,11 @@ var MasterList = React.createClass({
             </div>
         );
     },
+
+    handleBranchBaseChange: function(event) {
+        this.props.handleBranchBaseChange(event.target.value);
+    },
+
     _onChange: function() {
         //this.setState(this.loadPageData(this.state.pageId));
     }

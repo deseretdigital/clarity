@@ -73,6 +73,15 @@ var TeamProjectController = React.createClass({
 
         this._onChange();
     },
+    handleBranchBaseChange: function(value) {
+        console.log('handleBranchBaseChange', value);
+        this.setState({
+            selectedMaster: value
+        }, () => {
+            console.log('callback');
+            this._onChange();
+        });
+    },
     render: function(){
         //console.log("TeamProjectController#render this.getParams()", this.getParams());
         //console.log("TeamProjectController#render this.state", this.state);
@@ -98,7 +107,14 @@ var TeamProjectController = React.createClass({
                         <PullReqsList pullReqs={this.state.pullReqs} branches={this.state.branches} project={this.state.project} stories={this.state.stories} />
                     </div>
                     <div className="team-project__release-stories">
-                        <MasterList masters={this.state.masters} project={this.state.project} stories={this.state.stories} />
+                        <MasterList 
+                            masters={this.state.masters} 
+                            project={this.state.project} 
+                            stories={this.state.stories}  
+                            releaseBranches={this.state.releaseBranches}
+                            selectedMaster={this.state.selectedMaster}
+                            handleBranchBaseChange={this.handleBranchBaseChange}
+                        />
                     </div>
                 </div>
                 <div className="team-project__releases">
@@ -128,9 +144,16 @@ var TeamProjectController = React.createClass({
             branches: {},
             pullReqs: {},
             latestReleases: [],
+            releaseBranches: ['master'],
+            selectedMaster: '',
             storyIds: {},
             stories: {}
         };
+
+        // TOTAL HACK, but whatever
+        if(this.state && this.state.selectedMaster) {
+            state.selectedMaster = this.state.selectedMaster;
+        } 
 
         return TeamStore.get(self._getTeamName())
             .then(function(team){
@@ -166,6 +189,14 @@ var TeamProjectController = React.createClass({
             }).then(function(branches){
                 self._updateProgress(10);
                 state.branches = branches;
+                //console.log(branches);
+                _.forOwn(branches, (branchData, branchName) => {
+                    //console.log(branchData, branchName);
+                    if(branchName.substr(-3, 3) == '-rc') {
+                        state.releaseBranches.push(branchName);
+                    }
+                });
+
                 self.loadedProjects[self._getProjectName()] = true;
                 //console.log("TeamProjectController#_buildState finished", state);
                 return self._buildState_getMaster(state);
@@ -311,6 +342,10 @@ var TeamProjectController = React.createClass({
             //console.log("TeamProjectController#_buildState_getMaster state", state)
 
             var masterName = state.repos[repoName].default_branch;
+            if(state.branches[state.selectedMaster] && state.branches[state.selectedMaster][repoName]) {
+                masterName = state.selectedMaster;
+            }
+
 
             var masterPromise = BranchStore
                 .get(repoName, masterName)
@@ -401,6 +436,7 @@ var TeamProjectController = React.createClass({
     _onChange_queued: false,
     _onChange_deferredCount: 0,
     _onChange: function() {
+        //console.log("called");
         var self = this;
         if(this.initState)
         {
@@ -411,7 +447,7 @@ var TeamProjectController = React.createClass({
         if(self._onChange_queued)
         {
             self._onChange_deferredCount++;
-            // console.log("TeamProjectController#_onChange is already queued, _onChange_deferredCount", self._onChange_deferredCount)
+             //console.log("TeamProjectController#_onChange is already queued, _onChange_deferredCount", self._onChange_deferredCount)
             return;
         }
 
