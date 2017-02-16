@@ -266,7 +266,8 @@ _.assign(RepoApi.prototype, {
         return new Promise(function(resolve, reject){
             GitHubClient.repos.getBranches({
                 user: orgName,
-                repo: repoName
+                repo: repoName,
+                per_page: 100
             }, function(err, res){
                 // console.log("pre setBranchesCaches");
 
